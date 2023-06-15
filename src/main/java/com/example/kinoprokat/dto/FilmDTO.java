@@ -1,6 +1,9 @@
 package com.example.kinoprokat.dto;
 
 public class FilmDTO {
+    /*
+        Модель фильмов для представления пользователю без авторизации (то есть не учитывается, есть ли эти фильмы у пользователя).
+    */
     private long id;
     private String name;
     private String about;

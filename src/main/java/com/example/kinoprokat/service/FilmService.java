@@ -18,6 +18,7 @@ public class FilmService {
     FilmRepository filmRepository;
 
     public String checkAdd(String name, Date data, String genres, String ageRestriction, String director, String length, String about, String fullName) {
+        // Функция для добавления фильма и проверки полноты данных.
         List<Genres> genresList = new ArrayList<>();
         if (name.equals("")) {
             return "name";

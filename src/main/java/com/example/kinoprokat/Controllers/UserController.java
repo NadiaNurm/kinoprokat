@@ -33,6 +33,7 @@ public class UserController {
 
     @GetMapping("/personalArea")
     public String personalArea(@AuthenticationPrincipal User user, Model model) {
+        // Для пользователя выводит все купленные им фильмы
         List<Purchase> userPurchase = purchaseService.getAllUserPurchase(user.getId());
         ArrayList<FilmDTO> filmDTOList = purchaseService.allUserFilmsDto(userPurchase);
         model.addAttribute("filmDTOList", filmDTOList);
@@ -42,6 +43,7 @@ public class UserController {
 
     @GetMapping("/buyFilm/{id}")
     public String buyFilm(@AuthenticationPrincipal User user, @PathVariable(name = "id") String id) {
+        // Пользователь может купить конкретный фильм
         Film film = filmService.getFilmByID(id);
         if (purchaseService.existsByFilm(film)) {
             Purchase purchase = new Purchase(user, film, new Date());
@@ -61,6 +63,10 @@ public class UserController {
 
     @GetMapping("/buySubscription/{genre}")
     public String buySubscription(@AuthenticationPrincipal User user, @PathVariable(name = "genre") String genre, Model model) {
+        /* Страница, на которой отображается краткая информация обо всех фильмах по жанрам.
+        Пользователь может купить подписку на конкретный жанр.
+        Он так же выбирает срок подписки.
+        */
         model.addAttribute("genre", genre);
         Calendar calendar = Calendar.getInstance();
         LocalDate today = LocalDate.ofInstant(calendar.toInstant(), ZoneId.systemDefault());
@@ -76,6 +82,7 @@ public class UserController {
                                   @RequestParam(name = "today") String today,
                                   @RequestParam(name = "subType") String type) {
 
+        // Пользователь может купить подписку
         if (subscriptionService.checkSub(user, SubType.valueOf(type))) {
             Subscription subscription = new Subscription();
             subscription.setUser(user);
@@ -90,6 +97,7 @@ public class UserController {
 
     @GetMapping("/mainPage")
     public String printFilms(Model model) {
+        // Главная страница, на которой отображается краткая информация обо всех фильмах
         List<Film> filmList = filmService.getAllFilms();
         ArrayList<FilmDTO> filmDTOList = Util.allFilmsDto(filmList);
         model.addAttribute("filmDTOList", filmDTOList);
@@ -98,6 +106,7 @@ public class UserController {
 
     @GetMapping("/about/film/{id}")
     public String printFilm(@PathVariable(name = "id") String id, Model model) {
+        // Получаем полную информацию о конкретном фильме
         Film film = filmService.getFilmByID(id);
         model.addAttribute("filmID", film.getId());
         model.addAttribute("filmName", film.getName());
@@ -119,6 +128,7 @@ public class UserController {
     @PostMapping("/registration")
     public String registrate(@RequestParam(name = "username", required = false) String username,
                              @RequestParam(name = "password", required = false) String password, @RequestParam(name = "password2", required = false) String password2, Model model) {
+        // Регистрирует пользователей с уникальным именем
         if (!password.equals(password2)) {
             model.addAttribute("error", "Passwords not the same");
             return "registration";

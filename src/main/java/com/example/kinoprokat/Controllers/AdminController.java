@@ -1,4 +1,5 @@
 package com.example.kinoprokat.Controllers;
+
 import com.example.kinoprokat.model.Genres;
 import com.example.kinoprokat.model.User;
 import com.example.kinoprokat.service.FilmService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -45,7 +47,7 @@ public class AdminController {
                           @RequestParam(name = "genres", required = false) String genres, @RequestParam(name = "director", required = false) String director,
                           @RequestParam(name = "ageRestriction", required = false) String ageRestriction, @RequestParam(name = "length", required = false) String length,
                           @RequestParam(name = "about", required = false) String about, @RequestParam("f") MultipartFile f, Model model) throws IOException {
-
+        // Добавление фильма
         String fullName = "";
         String fileName = UUID.randomUUID().toString().substring(0, 9) + f.getOriginalFilename();
         if (f.getOriginalFilename().equals("")) {
@@ -68,6 +70,7 @@ public class AdminController {
 
     @GetMapping("/allUsers")
     public String allUsers(Model model) {
+        // Получаем список пользователей. Admin может забанить юзера или обновить.
         List<User> users = userService.findAllUsers();
         model.addAttribute("users", users);
         return "allUsers";
@@ -75,6 +78,7 @@ public class AdminController {
 
     @GetMapping("/allUsers/bane/{id}")
     public String userBane(@PathVariable(name = "id") String id) {
+        // Баним пользователя
         userService.userBane(Long.valueOf(id));
         return "redirect:/allUsers";
     }
@@ -92,6 +96,7 @@ public class AdminController {
     @PostMapping("/updateUser")
     public String updateUser(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password,
                              @RequestParam(name = "role") String role, @RequestParam(name = "userId") String id) {
+        // Обновляем пользователя
         User user = userService.getUserById(Long.valueOf(id));
         userService.updateUser(user, username, password, role);
         return "redirect:/allUsers";

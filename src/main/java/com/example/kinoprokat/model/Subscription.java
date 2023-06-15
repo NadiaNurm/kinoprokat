@@ -11,6 +11,9 @@ import java.util.Objects;
 @Entity
 @Data
 public class Subscription {
+    /*
+        Модель подписки. Пользователь покупает подписку на неделю, месяц или год. У подписки есть жанр, дата начала, окончания в зависимости от типа и тип.
+    */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

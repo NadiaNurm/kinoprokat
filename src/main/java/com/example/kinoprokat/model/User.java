@@ -10,6 +10,9 @@ import java.util.Objects;
 
 @Entity
 public class User implements UserDetails {
+    /*
+        Модель пользователя. Пользователь имеет имя и пароль. Он так же может купить отдельные фильмы или подписку по жанру.
+    */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

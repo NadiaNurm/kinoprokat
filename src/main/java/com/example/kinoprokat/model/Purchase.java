@@ -6,6 +6,10 @@ import java.util.Date;
 
 @Entity
 public class Purchase {
+    /*
+       Модель покупки фильма.
+
+   */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

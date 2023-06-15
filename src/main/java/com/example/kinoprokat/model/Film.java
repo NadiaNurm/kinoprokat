@@ -10,6 +10,10 @@ import java.util.List;
 
 @Entity
 public class Film {
+    /*
+        Модель фильма. Хранит id, информацию о фильме, включая ограничение по возрасту и список жанров.
+        В БД так же хранится путь до постера к фильму, сами картинки хранятся в пректе по адресу kinoprokat\src\main\resources\static\img
+    */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
