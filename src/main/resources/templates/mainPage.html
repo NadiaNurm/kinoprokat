@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/cssandjs/main.js}"></script>
+
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-slider/css/bootstrap-slider.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/mainPage">Netflix</a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/personalArea">Personal Area</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/registration">Registration</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row" th:fragment="list" xmlns:th="http://www.thymeleaf.org">
+        <div th:each="film : ${filmDTOList}" class="col-sm-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${film.name}">Film name</h5>
+                    <img th:src="@{/img/{filename}(filename = ${film.filename})}" width="300" height="300">
+                    <p class="card-text" th:text="${film.about}">Information</p>
+                    <form action="#" th:action="@{/about/film/} + ${{film.id}}" method="get">
+                        <button class="btn btn-primary" th:id="'table_entry_childs_button_' + ${film.name}" type="submit">
+                            <i>details</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:rel="stylesheet" th:src="@{assets/bootstrap-slider/bootstrap-slider.js}"></script>
+
+
+
+</body>
+</html>
+

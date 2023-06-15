@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <link th:href="@{/styles/cssandjs/styleAdmin.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/js/cssandjs/registration.js}"></script>
+  <title>Title</title>
+</head>
+<body>
+<div align="center">
+  <h1>Add Film</h1>
+  <form th:action="@{/adminAddFilm}" enctype="multipart/form-data" method="post">
+    <table>
+      <tr>
+        <td><label for="name">Name:</label></td>
+        <td><input type="text" name="name" id="name" placeholder="your name"></td>
+      </tr>
+      <tr>
+        <td><label for="data">Data:</label></td>
+        <td><input type="date" name="data" id="data"></td>
+      </tr>
+      <tr>
+        <td><label>Genres:</label></td>
+        <td><select name = "genres" multiple="multiple">
+            <option th:each="g : ${genres}" th:value="${g}" th:text="${g}"></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="director">Director:</label></td>
+        <td><input type="text" name="director" id="director"></td>
+      </tr>
+      <tr>
+        <td><label for="length">Length:</label></td>
+        <td><input type="text" name="length" id="length"></td>
+      </tr>
+      <tr>
+        <td><label for="ageRestriction"> AgeRestriction:</label></td>
+        <td> <select name="ageRestriction" id="ageRestriction">
+          <option value="">Select Age Restriction</option>
+          <option value="A">0+</option>
+          <option value="B">6+</option>
+          <option value="C">12+</option>
+          <option value="D">16+</option>
+          <option value="E">18+</option>
+        </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="about">About:</label></td>
+        <td><textarea name="about" id="about" rows="5" cols="25" placeholder="Write about film..."></textarea></td>
+      </tr>
+      <tr>
+       <td colspan="2"><center> <input type="submit" class="submit" value="Add" /></center></td>
+      </tr>
+      <tr>
+        <td><p th:text="${error} + '!'"></p></td>
+      </tr>
+      <tr><input type="file" name="f"></tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>
+

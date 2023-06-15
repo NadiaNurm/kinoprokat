@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script type="text/javascript" th:src="@{/js/cssandjs/main.js}"></script>
+  <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+  <link th:rel="stylesheet" th:href="@{assets/bootstrap-slider/css/bootstrap-slider.css}"/>
+  <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+  <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mt-5 mb-5">
+        <table id="example" class="table table-bordered" style="width: 100%">
+          <thead>
+          <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="user : ${users}">
+            <td th:text="${user.username}">Username</td>
+            <td th:text="${user.password}">Password</td>
+            <td th:text="${user.role}">Role</td>
+            <td th:text="${user.status}">Status</td>
+            <td> <form action="#" th:action="@{/allUsers/bane/} + ${{user.id}}" method="get">
+              <button class="btn btn-primary" th:id="'table_entry_childs_button_' + ${user.username}" type="submit">
+                <i>Bane</i>
+              </button>
+            </form></td>
+            <td><form action="#" th:action="@{/allUsers/update/} + ${{user.id}}" method="get">
+              <button class="btn btn-primary" th:id="'table_entry_childs_button_' + ${user.username}" type="submit">
+                <i>Update</i>
+              </button>
+            </form></td>
+          </tr>
+          </tbody>
+        </table>
+</body>
+</html>

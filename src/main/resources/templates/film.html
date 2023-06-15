@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-slider/css/bootstrap-slider.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
+    <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+    <link th:href="@{/styles/cssandjs/film.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/cssandjs/main.js}"></script>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/mainPage">Netflix</a>
+    </div>
+</nav>
+
+<h2 th:text="${filmName}" style="text-align:center">film</h2>
+<div class="flex-container">
+    <img th:src="@{/img/{filename}(filename = ${filename})}" width="40%">
+    <div  class="container">
+    <table>
+        <tr>
+            <td><label>Name:</label></td>
+            <td><h1 th:text="${filmName}">title</h1></td>
+        </tr>
+        <tr>
+            <td><label>Director:</label></td>
+            <td><p th:text="${filmDirector}">title</p></td>
+        </tr>
+        <tr>
+            <td><label>Date:</label></td>
+            <td><p th:text="${#dates.format(filmDate, 'dd-MM-yyyy')}"></p></td>
+        </tr>
+        <tr>
+            <td><label>Age Restriction:</label></td>
+            <td><p th:text="${filmAge}">title</p></td>
+        </tr>
+        <tr>
+            <td><label>Length:</label></td>
+            <td><p th:text="${filmLen}">title</p></td>
+        </tr>
+        <tr>
+            <td><label>Genres:</label></td>
+            <td><p th:text="${filmGenres}">title</p></td>
+        </tr>
+        <tr>
+            <td><label>About:</label></td>
+            <td><p th:text="${filmAbout}">title</p></td>
+        </tr>
+        <tr>
+            <td><form action="#" th:action="@{/buyFilm/} + ${{filmID}}" method="get">
+                <button th:id="'table_entry_childs_button_' + ${filmID}" type="submit">
+                    <i>Buy</i>
+            </td> </tr>
+    </table>
+</div>
+</body>
+</html>
+

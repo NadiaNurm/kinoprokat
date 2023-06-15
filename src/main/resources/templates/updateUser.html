@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/cssandjs/main.js}"></script>
+
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-slider/css/bootstrap-slider.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
+</head>
+<body>
+    <form th:action="@{/updateUser}" method="post">
+        <input type="hidden" id="userId" name="userId" th:value="${id}"/>
+    <table>
+        <tr>
+            <td><label for="username">Name:</label></td>
+            <td><input type="text" th:value="${username}" name="username" id="username"></td>
+        </tr>
+        <td><label for="password">Password:</label></td>
+        <td><input type="text" th:value="${password}" name="password" id="password"></td>
+        <tr>
+            <td><label>Role:</label></td>
+            <td>
+                <div>
+                    <input type="radio" id="user" name="role" value="user"
+                           checked>
+                    <label for="user">User</label>
+                </div>
+                <div>
+                    <input type="radio" id="admin" name="role" value="admin"
+                           checked>
+                    <label for="admin">Admin</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><button class="btn btn-primary" type="submit">Update</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
